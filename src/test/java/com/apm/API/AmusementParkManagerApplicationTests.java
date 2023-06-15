@@ -1,10 +1,10 @@
-package com.APM.v1;
+package com.apm.API;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class V1ApplicationTests {
+class AmusementParkManagerApplicationTests {
 
 	@Test
 	void contextLoads() {

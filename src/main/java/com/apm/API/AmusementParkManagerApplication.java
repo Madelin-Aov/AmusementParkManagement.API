@@ -1,13 +1,13 @@
-package com.APM.v1;
+package com.apm.API;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class V1Application {
+public class AmusementParkManagerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(V1Application.class, args);
+		SpringApplication.run(AmusementParkManagerApplication.class, args);
 	}
 
 }
