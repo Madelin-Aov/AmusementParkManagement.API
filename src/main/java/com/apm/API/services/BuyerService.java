@@ -14,4 +14,12 @@ public class BuyerService {
     buyerRepository.save(buyer);
     
     }
+    public void editBuyer(Buyer buyer) throws Exception{
+        if (buyerRepository.findById(buyer.id).orElse(null) == null){
+            throw new Exception("Buyer not exist");
+        }
+    buyerRepository.save(buyer);
+    
+    }
+   
 }
