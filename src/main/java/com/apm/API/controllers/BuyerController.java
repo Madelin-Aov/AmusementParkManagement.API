@@ -38,7 +38,7 @@ public class BuyerController {
     }
     
     @GetMapping("/getAll")
-    public List<Buyer> getBuyer(@RequestBody Buyer buyer){
+    public List<Buyer> getBuyer(){
     
      return  buyerService.getBuyer();
     }
