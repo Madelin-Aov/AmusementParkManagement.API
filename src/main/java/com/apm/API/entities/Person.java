@@ -1,12 +1,8 @@
 
 package com.apm.API.entities;
-
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.InheritanceType;
-import javax.persistence.Inheritance;
 import javax.persistence.MappedSuperclass;
 
 
@@ -16,10 +12,10 @@ public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
-    public String name;
-    public String lastName;
-    public String mail;
-    public String phone;
+    private String name;
+    private String lastName;
+    private String mail;
+    private String phone;
    
     public Person() {
     }

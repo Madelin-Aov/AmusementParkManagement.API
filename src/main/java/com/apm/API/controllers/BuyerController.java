@@ -42,4 +42,6 @@ public class BuyerController {
     
      return  buyerService.getBuyer();
     }
+    
+    
 }

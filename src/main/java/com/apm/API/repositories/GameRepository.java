@@ -5,13 +5,16 @@
 package com.apm.API.repositories;
 
 import com.apm.API.entities.Buyer;
+import com.apm.API.entities.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Administrator
  */
-public interface GameRepository extends JpaRepository<Buyer, Integer>{
+@Repository
+public interface GameRepository extends JpaRepository<Game, Integer>{
     
     
 }
