@@ -12,29 +12,42 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Service
 public class GameService {
+
     @Autowired
     private GameRepository gameRepository;
     @Autowired
     private ScheduleRepository scheduleRepository;
 
     public void createGame(Game game) {
-         
+
         gameRepository.save(game);
-        
+
         for (Schedule schedule : game.getSchedules()) {
             schedule.setGame(game);
             scheduleRepository.save(schedule);
         }
-        
-      
-        
+
     }
 
     public void editGame(Game game) throws Exception {
-        if (gameRepository.findById(game.getId()).orElse(null) == null) {
+        
+     
+        Game currentGame = gameRepository.findById(game.getId()).orElse(null);
+
+        if (currentGame == null) {
             throw new Exception("Game not found");
         }
+        for (Schedule schedule : currentGame.getSchedules()) {
+            scheduleRepository.deleteById(schedule.getId());
+        }
+        currentGame.getSchedules().clear();
+
         gameRepository.save(game);
+
+        for (Schedule schedule : game.getSchedules()) {
+            schedule.setGame(game);
+            scheduleRepository.save(schedule);
+        }
 
     }
 
@@ -44,9 +57,10 @@ public class GameService {
         }
         gameRepository.deleteById(id);
     }
-    
-    @GetMapping
+
+  
     public List<Game> getGames() {
         return gameRepository.findAll();
     }
+
 }

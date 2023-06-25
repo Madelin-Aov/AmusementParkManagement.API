@@ -1,5 +1,7 @@
 package com.apm.API.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import java.time.LocalTime;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,7 @@ import lombok.Setter;
 
 @Entity
 @Setter @Getter
-public class Schedule {
+public class Schedule implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -22,6 +24,7 @@ public class Schedule {
     private LocalTime endTime;
     @ManyToOne()
     @JoinColumn(name="game_id")
+    @JsonBackReference
     private Game game;
 
     public Schedule() {
