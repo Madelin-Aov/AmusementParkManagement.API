@@ -5,8 +5,8 @@
 package com.apm.API.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
-
 
 /**
  *
@@ -14,8 +14,10 @@ import javax.persistence.PrimaryKeyJoinColumn;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Buyer extends Person{
+public class Buyer extends Person {
 
+    @OneToOne(mappedBy = "buyer")
+    private Ticket ticket;
 
     public Buyer() {
     }
@@ -23,8 +25,5 @@ public class Buyer extends Person{
     public Buyer(Integer Id, String name, String lastName, String mail, String phone) {
         super(Id, name, lastName, mail, phone);
     }
-    
-    
 
-   
 }

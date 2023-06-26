@@ -34,9 +34,15 @@ public class BuyerService {
 
     }
 
-    @GetMapping
+  
     public List<Buyer> getBuyer() {
         return buyerRepository.findAll();
+    }
+    
+    
+    public Buyer getBuyerById(Integer id){
+    
+        return buyerRepository.findById(id).orElse(null);
     }
 
 }
