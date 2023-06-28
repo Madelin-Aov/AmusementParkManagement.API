@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +21,10 @@ public class Game implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-//    @OneToMany
-//    private List<Employee> employeesList;
     @OneToMany(mappedBy = "game")
+    @JsonManagedReference
+    private List<Employee> employeesList;
+     @OneToMany(mappedBy = "game")
     @JsonManagedReference
     private List<Schedule> schedules;
     private Integer price;

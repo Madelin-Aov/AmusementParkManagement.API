@@ -1,6 +1,7 @@
 
 package com.apm.API.entities;
 
+import javax.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,8 @@ import lombok.Setter;
 public class User {
     private String password;
     private String userName;
-
+//    @OneToOne(mappedBy = "employee-id" )
+    //private Employee employee;
     public User() {
     }
 
