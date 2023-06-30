@@ -16,7 +16,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "id")
 public class Employee extends Person implements Serializable {
 
-    private Integer id;
+   
     @ManyToOne()
     @JoinColumn(name = "game_id")
     @JsonBackReference
@@ -31,5 +31,7 @@ public class Employee extends Person implements Serializable {
         super(id, name, lastName, mail, phone);
         this.game = game;
     }
+
+  
 
 }
