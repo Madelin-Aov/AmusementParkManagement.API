@@ -3,9 +3,8 @@ package com.apm.API.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 @Entity
 @Getter @Setter
-public class Ticket {
+public class Ticket implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

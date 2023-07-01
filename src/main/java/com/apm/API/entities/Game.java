@@ -24,7 +24,7 @@ public class Game implements Serializable{
     @OneToMany(mappedBy = "game")
     @JsonManagedReference
     private List<Employee> employeesList;
-     @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game")
     @JsonManagedReference
     private List<Schedule> schedules;
     private Integer price;
