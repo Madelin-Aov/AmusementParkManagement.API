@@ -18,10 +18,8 @@ public class Schedule implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @JsonFormat(pattern="HH")
-    private LocalTime initialTime;
-     @JsonFormat(pattern="HH")
-    private LocalTime endTime;
+    private Integer initialTime;
+    private Integer endTime;
     @ManyToOne()
     @JoinColumn(name="game_id")
     @JsonBackReference
@@ -30,7 +28,7 @@ public class Schedule implements Serializable{
     public Schedule() {
     }
 
-    public Schedule(Integer id, LocalTime initialTime, LocalTime endTime, Game game) {
+    public Schedule(Integer id, Integer initialTime, Integer endTime, Game game) {
         this.id = id;
         this.initialTime = initialTime;
         this.endTime = endTime;
