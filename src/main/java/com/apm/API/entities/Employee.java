@@ -21,9 +21,11 @@ public class Employee extends Person implements Serializable {
     @JoinColumn(name = "game_id")
     @JsonBackReference
     private Game game;
-//    @OneToOne(mappedBy ="employee_id")
-    // private User user;
-
+    
+    @OneToOne()
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
+    
     public Employee() {
     }
 
