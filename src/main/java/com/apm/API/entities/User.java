@@ -14,19 +14,23 @@ import lombok.Setter;
 @Entity
 public class User implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-   
+    @GeneratedValue(strategy = GenerationType.AUTO)   
     private Integer id;
     private String password;
     private String userName;
     @OneToOne(mappedBy = "user")
     private Employee employee;
     
-
+    
+    
+    public User() {
+    }
+       
     public User(String password, String userName) {
         this.password = password;
         this.userName = userName;
     }
+    
     
     
 }
