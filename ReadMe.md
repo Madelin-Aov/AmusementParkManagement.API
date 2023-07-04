@@ -22,9 +22,17 @@ Se pueden crear y administrar entidades como la de clientes, empleados, juegos, 
 - **'PUT /game/{id}'**: Actualiza los detalles de un juego específico por su ID.
 - **'DELETE /game/{id}'**: Elimina un juego específico por su ID.
 
-### Ven
-- **'GET /game/getAll'**: Obtiene la lista de todos los juegos registrados en el sistema.
-- **'POST /game/create'**: Crea un nuevo juego en el sistema.
-- **'PUT /game/{id}'**: Actualiza los detalles de un juego específico por su ID.
-- **'DELETE /game/{id}'**: Elimina un juego específico por su ID.
+### Tickets
+- **'GET /ticket/getAll'**: Obtiene la lista de todos los tickets registrados en el sistema.
+- **'POST /ticket/create'**: Crea un nuevo ticket en el sistema.
+- **'PUT /ticket/{id}'**: Actualiza los detalles de un ticket específico por su ID.
+- **'DELETE /ticket/{id}'**: Elimina un ticket específico por su ID.
+
+
+### Usuario
+- **'GET /user/getAll'**: Obtiene la lista de todos los usuarios registrados en el sistema.
+- **'POST /user/create'**: Crea un nuevo usuario en el sistema.
+- **'PUT /user/{id}'**: Actualiza los detalles de un usuario específico por su ID.
+- **'DELETE /user/{id}'**: Elimina un usuario específico por su ID.
+
 
