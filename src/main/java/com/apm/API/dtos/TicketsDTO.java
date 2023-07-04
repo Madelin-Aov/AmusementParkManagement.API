@@ -16,6 +16,8 @@ public class TicketsDTO {
     private LocalDateTime dateTime;
     
     private Integer buyerId;
+    
+    private Integer gameId;
 
     public TicketsDTO() {
     }

@@ -11,7 +11,7 @@ import lombok.Setter;
 public class SaleDTO {
 
     private Integer id;
-    
+   
     private List<TicketsDTO> ticketsDto;
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate saleDate;

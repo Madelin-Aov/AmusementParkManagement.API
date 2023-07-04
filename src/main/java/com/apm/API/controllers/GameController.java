@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.apm.API.dtos.GameDTO;
+import org.springframework.http.MediaType;
 
 @RequestMapping("/game")
-
 @RestController
 public class GameController {
     
     @Autowired
     GameService gameService;
     
-    @PostMapping("/create")
-    public void createGame(@RequestBody Game game) {
+    @PostMapping(value = "/create" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createGame(@RequestBody GameDTO game) {
         gameService.createGame(game);
-
     }
 
     @PutMapping("/edit")
-    public void editGame(@RequestBody Game game) throws Exception{
+    public void editGame(@RequestBody GameDTO game) throws Exception{
         gameService.editGame(game);
         
     }

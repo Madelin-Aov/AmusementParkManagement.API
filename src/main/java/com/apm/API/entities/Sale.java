@@ -25,16 +25,11 @@ public class Sale {
     private List<Ticket> tickets;
      @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate saleDate;
-
+    
+    private Integer totalPrice;
+    
     public Sale() {
     }
-
-    public Sale(Integer id, List<Ticket> tickets, LocalDate saleDate) {
-        this.id = id;
-        this.tickets = tickets;
-        this.saleDate = saleDate;
-    }
-
  
     
 }

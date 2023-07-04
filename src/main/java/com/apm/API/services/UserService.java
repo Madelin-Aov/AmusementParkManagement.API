@@ -2,6 +2,7 @@ package com.apm.API.services;
 
 import com.apm.API.entities.User;
 import com.apm.API.repositories.UserRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,9 @@ public class UserService {
         }
         userRepository.deleteById(id);
 
+    }
+    
+    public List<User> getUser(){
+        return userRepository.findAll();
     }
 }

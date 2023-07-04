@@ -31,7 +31,12 @@ public class Ticket implements Serializable{
     @JoinColumn(name="sale_id")
     @JsonBackReference
     private Sale sale;
-    
+         
+    @ManyToOne()
+    @JoinColumn(name="game_id")
+    @JsonBackReference
+    private Game game;
+        
     public Ticket() {
     }
 
