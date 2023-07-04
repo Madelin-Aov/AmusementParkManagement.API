@@ -6,14 +6,15 @@ import com.apm.API.entities.Sale;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
 public class TicketsDTO {
     private Integer id;
-    @JsonFormat(pattern="dd-MM-yyyy:HH")
-    private LocalDateTime dateTime;
+    @JsonFormat(pattern="dd-MM-yyyy:HH:mm")
+    private Date dateTime;
     
     private Integer buyerId;
     

@@ -3,8 +3,10 @@ package com.apm.API.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,11 +22,12 @@ public class Ticket implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @JsonFormat(pattern="dd-MM-yyyy:HH")
-    private LocalDateTime dateTime;
+    @JsonFormat(pattern="dd-MM-yyyy:HH:mm")
+    private Date dateTime;
     
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "buyer_id")
+    @JsonIgnore()
     private Buyer buyer;
     
     @ManyToOne()
@@ -40,7 +43,7 @@ public class Ticket implements Serializable{
     public Ticket() {
     }
 
-    public Ticket(Integer id, LocalDateTime dateTime, Buyer buyer, Sale sale) {
+    public Ticket(Integer id, Date dateTime, Buyer buyer, Sale sale) {
         this.id = id;
         this.dateTime = dateTime;
         this.buyer = buyer;

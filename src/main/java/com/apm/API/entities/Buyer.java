@@ -4,7 +4,11 @@
  */
 package com.apm.API.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -16,8 +20,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "id")
 public class Buyer extends Person {
 
-    @OneToOne(mappedBy = "buyer")
-    private Ticket ticket;
+    @OneToMany(mappedBy = "buyer")
+    @JsonIgnore()    
+    private List<Ticket> tickets;
 
     public Buyer() {
     }
