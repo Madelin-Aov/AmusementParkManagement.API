@@ -25,7 +25,7 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
     
-    public List<Employee> getBuyer() {
+    public List<Employee> getAll() {
         return employeeRepository.findAll();
     }
     

@@ -15,19 +15,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SaleService {
-
+    
     @Autowired
     private SaleRepository saleRepository;
     @Autowired
     private BuyerService buyerService;
     @Autowired
     private TicketRepository ticketRepository;
-
+    
     @Autowired
     private GameService gameService;
-
+    
     public void createSale(SaleDTO saleDto) {
-
+        
         Sale sale = new Sale();
         sale.setSaleDate(saleDto.getSaleDate());
         Integer totalPrice = 0;
@@ -37,7 +37,7 @@ public class SaleService {
         }
         sale.setTotalPrice(totalPrice);
         saleRepository.save(sale);
-
+        
         for (TicketDTO ticketDTO : saleDto.getTicketsDto()) {
             Ticket ticket = new Ticket();
             ticket.setDateTime(ticketDTO.getDateTime());
@@ -46,27 +46,46 @@ public class SaleService {
             ticket.setSale(sale);
             ticketRepository.save(ticket);
         }
-
+        
     }
-
+    
     public void deleteSale(Integer id) throws Exception {
-        if (saleRepository.findById(id).orElse(null) == null) {
+        Sale saleToDelete = saleRepository.findById(id).orElse(null);
+        if (saleToDelete == null) {
             throw new Exception("Sale not found");
         }
+        
+        for (Ticket ticket : saleToDelete.getTickets()) {
+            ticketRepository.deleteById(ticket.getId());
+        }
+        
         saleRepository.deleteById(id);
-
+        
     }
-
+    
     public List<Sale> getSales() {
         return saleRepository.findAll();
     }
-
+    
     public void editDate(LocalDate saleDate, Integer id) throws Exception {
         Sale sale = saleRepository.findById(id).orElse(null);
         if (sale == null) {
             throw new Exception("Sale not found");
         }
         sale.setSaleDate(saleDate);
+        saleRepository.save(sale);
+    }
+    
+    public Sale getById(Integer id){
+        return saleRepository.findById(id).orElse(null);
+    }
+    
+    public void updateTotalPrice(Sale sale){
+        Integer totalPrice = 0;
+        for (Ticket ticket : sale.getTickets()) {
+            totalPrice = ticket.getGame().getPrice() + totalPrice;
+        }
+        sale.setTotalPrice(totalPrice);
         saleRepository.save(sale);
     }
 }

@@ -2,7 +2,10 @@ package com.apm.API.services;
 
 import com.apm.API.dtos.TicketDTO;
 import com.apm.API.dtos.TicketOutputDTO;
+import com.apm.API.entities.Game;
+import com.apm.API.entities.Sale;
 import com.apm.API.entities.Ticket;
+import com.apm.API.repositories.SaleRepository;
 import com.apm.API.repositories.TicketRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +17,15 @@ public class TicketService {
 
     @Autowired
     TicketRepository ticketRespository;
+
     @Autowired
     BuyerService buyerService;
+
+    @Autowired
+    GameService gameService;
+
+    @Autowired
+    SaleService saleService;
 
     public void createTicket(TicketDTO ticketsDTO) {
         Ticket ticket = new Ticket();
@@ -27,10 +37,15 @@ public class TicketService {
     }
 
     public void deleteTicket(Integer id) throws Exception {
-        if (ticketRespository.findById(id).orElse(null) == null) {
+        Ticket ticketToDelete = ticketRespository.findById(id).orElse(null);
+        Sale saleToUpdateTotalPrice = ticketToDelete.getSale();
+        if (ticketToDelete == null) {
             throw new Exception("Ticket not found");
         }
         ticketRespository.deleteById(id);
+
+        //RECALCULO EL PRECIO TOTAL DE LA VENTA
+        saleService.updateTotalPrice(saleToUpdateTotalPrice);
     }
 
     public List<TicketOutputDTO> getTickets() {
@@ -42,6 +57,22 @@ public class TicketService {
             tickets.add(ticketOutputDTO);
         }
         return tickets;
+    }
+
+    public void editTicket(TicketDTO ticketDTO) throws Exception {
+        Ticket ticketToUpdate = ticketRespository.findById(ticketDTO.getId()).orElse(null);
+        if (ticketToUpdate == null) {
+            throw new Exception("Ticket not found");
+        }
+        ticketToUpdate.setDateTime(ticketDTO.getDateTime());
+
+        ticketToUpdate.setBuyer(buyerService.getBuyerById(ticketDTO.getBuyerId()));
+        ticketToUpdate.setGame(gameService.getById(ticketDTO.getGameId()));
+
+        ticketRespository.save(ticketToUpdate);
+
+        //RECALCULO EL PRECIO TOTAL DE LA VENTA
+        saleService.updateTotalPrice(ticketToUpdate.getSale());
     }
 
 }

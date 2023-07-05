@@ -34,8 +34,8 @@ public class EmployeeController {
     }
     
     @GetMapping("/getAll")
-    public List<Employee> getBuyer(){
+    public List<Employee> getAll(){
     
-     return  employeeService.getBuyer();
+     return  employeeService.getAll();
     } 
 }
