@@ -18,6 +18,10 @@ public class BuyerService {
 
     }
 
+    /**
+     * Método para editar los atributos del objeto Buyer(comprador) recibido como parametro.
+     * Antes de guardar el objeto se verifica que exista. Para guardar se utiliza la interfaz de JPA Repository y su método .save.
+     */
     public void editBuyer(Buyer buyer) throws Exception {
         if (buyerRepository.findById(buyer.id).orElse(null) == null) {
             throw new Exception("Buyer not exist");
@@ -34,14 +38,12 @@ public class BuyerService {
 
     }
 
-  
     public List<Buyer> getBuyer() {
         return buyerRepository.findAll();
     }
-    
-    
-    public Buyer getBuyerById(Integer id){
-    
+
+    public Buyer getBuyerById(Integer id) {
+
         return buyerRepository.findById(id).orElse(null);
     }
 
