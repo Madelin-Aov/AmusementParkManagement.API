@@ -1,8 +1,10 @@
 package com.apm.API.controllers;
 
 import com.apm.API.dtos.SaleDTO;
+import com.apm.API.dtos.SaleEditInputDTO;
 import com.apm.API.entities.Sale;
 import com.apm.API.services.SaleService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +43,7 @@ public class SaleController {
     }
 
     @PutMapping("/editDate")
-    public void editDate(@RequestBody LocalDate saleDate, @RequestBody Integer id) throws Exception {
-        saleService.editDate(saleDate, id);
+    public void editDate(@RequestBody SaleEditInputDTO saleEditInputDTO) throws Exception {
+        saleService.editDate(saleEditInputDTO.getSaleDate(), saleEditInputDTO.getId());
     }
 }
