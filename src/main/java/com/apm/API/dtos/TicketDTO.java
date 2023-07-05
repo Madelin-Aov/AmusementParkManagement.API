@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class TicketsDTO {
+public class TicketDTO {
     private Integer id;
     @JsonFormat(pattern="dd-MM-yyyy:HH:mm")
     private Date dateTime;
@@ -20,7 +20,7 @@ public class TicketsDTO {
     
     private Integer gameId;
 
-    public TicketsDTO() {
+    public TicketDTO() {
     }
     
       

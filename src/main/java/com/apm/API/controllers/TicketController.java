@@ -1,6 +1,7 @@
 package com.apm.API.controllers;
 
-import com.apm.API.dtos.TicketsDTO;
+import com.apm.API.dtos.TicketDTO;
+import com.apm.API.dtos.TicketOutputDTO;
 import com.apm.API.entities.Ticket;
 import com.apm.API.services.TicketService;
 import java.util.List;
@@ -17,24 +18,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TicketController {
+
     @Autowired
     TicketService ticketService;
-    
+
     @PostMapping("/create")
-    public void createTicket(@RequestBody TicketsDTO ticketsDTO) {
+    public void createTicket(@RequestBody TicketDTO ticketsDTO) {
         ticketService.createTicket(ticketsDTO);
 
     }
-    
-   @DeleteMapping("/delete")
+
+    @DeleteMapping("/delete")
     public void deleteTicket(@RequestParam Integer id) throws Exception {
         ticketService.deleteTicket(id);
     }
-    
-     @GetMapping("/getAll")
-    public List<Ticket>getTickets(){
-    
-     return  ticketService.getTickets();
+
+    @GetMapping("/getAll")
+    public List<TicketOutputDTO> getTickets() {
+        return ticketService.getTickets();
     }
-    
+
 }
