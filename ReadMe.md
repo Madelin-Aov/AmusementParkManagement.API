@@ -3,6 +3,10 @@
 Esta API permite gestionar la venta de entradas para los juegos ofrecidos en el parque. 
 Se pueden crear y administrar entidades como la de clientes, empleados, juegos, tickets, ventas.
 
+#### Tecnologías utilizadas
+- Mysql
+- Java
+
 ## Endpoints
 ### Compradores
 - **'GET /buyer/getAll'**: Obtiene la lista de todos los vendedores registrados en el sistema.
@@ -39,5 +43,7 @@ Se pueden crear y administrar entidades como la de clientes, empleados, juegos, 
 - **'POST /sale/create'**: Crea una nueva venta en el sistema.
 - **'PUT /editDate/{id}'**: Actualiza la fecha de una venta.
 - **'DELETE /sale/delete{id}'**: Elimina una venta específica por su ID.
+
+
 
 
