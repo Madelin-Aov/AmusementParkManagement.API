@@ -1,6 +1,7 @@
 
 package com.apm.API.controllers;
 
+import com.apm.API.dtos.UserInputDTO;
 import com.apm.API.entities.User;
 import com.apm.API.services.UserService;
 import java.util.List;
@@ -21,7 +22,7 @@ public class UserController {
     UserService userService;
     
     @PostMapping("/create")
-    public void createUser(@RequestBody User user) {
+    public void createUser(@RequestBody UserInputDTO user) {
         userService.createUser(user);
 
     }

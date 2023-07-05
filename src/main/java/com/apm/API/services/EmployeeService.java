@@ -2,6 +2,7 @@ package com.apm.API.services;
 
 import com.apm.API.entities.Employee;
 import com.apm.API.entities.Game;
+import com.apm.API.entities.User;
 import com.apm.API.repositories.EmployeeRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ public class EmployeeService {
     
     public List<Employee> getAll() {
         return employeeRepository.findAll();
+    }
+    
+    public Employee getById(Integer id){
+        return employeeRepository.findById(id).orElse(null);
     }
     
 }
