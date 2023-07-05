@@ -1,6 +1,7 @@
 package com.apm.API.services;
 
 import com.apm.API.dtos.UserInputDTO;
+import com.apm.API.dtos.UserOutputLoginDTO;
 import com.apm.API.entities.Employee;
 import com.apm.API.entities.User;
 import com.apm.API.repositories.EmployeeRepository;
@@ -43,8 +44,8 @@ public class UserService implements UserDetailsService{
     }
     
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        User user = userRepository.findByUserName(userName);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
@@ -53,7 +54,17 @@ public class UserService implements UserDetailsService{
                 .withUsername(user.getUserName())
                 .password(user.getPassword())
                 .roles(user.getEmployee().getType().toString())
-                //.roles("ADMIN")
                 .build();
     }
+    
+    public UserOutputLoginDTO getUser(String userName, String pwd){
+       
+         User user =  userRepository.findByUserName(userName);
+         if(user != null && user.getPassword().equals(pwd)){
+            return new UserOutputLoginDTO(user.getUserName(),user.getPassword()
+                    ,user.getEmployee().getType().toString());
+         }
+        throw new UsernameNotFoundException("User not found");
+    }
+    
 }

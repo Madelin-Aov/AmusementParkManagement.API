@@ -1,5 +1,6 @@
 
 package com.apm.API.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ public class User implements Serializable{
     private String password;
     private String userName;
     @OneToOne(mappedBy = "user")
+    @JsonIgnore()
     private Employee employee;
     
     

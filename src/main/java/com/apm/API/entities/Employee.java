@@ -2,6 +2,7 @@ package com.apm.API.entities;
 
 import com.apm.API.enums.EmployeeRole;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,6 +31,7 @@ public class Employee extends Person implements Serializable {
     
     @OneToOne()
     @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JsonIgnore()
     private User user;
     
     @Enumerated(EnumType.STRING)
