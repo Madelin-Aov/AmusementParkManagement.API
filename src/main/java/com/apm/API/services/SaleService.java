@@ -1,12 +1,14 @@
 package com.apm.API.services;
 
 import com.apm.API.dtos.SaleDTO;
-import com.apm.API.dtos.TicketsDTO;
+import com.apm.API.dtos.TicketDTO;
 import com.apm.API.entities.Game;
 import com.apm.API.entities.Sale;
 import com.apm.API.entities.Ticket;
 import com.apm.API.repositories.SaleRepository;
 import com.apm.API.repositories.TicketRepository;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,17 +31,18 @@ public class SaleService {
         Sale sale = new Sale();
         sale.setSaleDate(saleDto.getSaleDate());
         Integer totalPrice = 0;
-        for (TicketsDTO ticketDTO : saleDto.getTicketsDto()) {
+        for (TicketDTO ticketDTO : saleDto.getTicketsDto()) {
             Game game = gameService.getById(ticketDTO.getGameId());
             totalPrice = game.getPrice() + totalPrice;
         }
         sale.setTotalPrice(totalPrice);
         saleRepository.save(sale);
 
-        for (TicketsDTO ticketDTO : saleDto.getTicketsDto()) {
+        for (TicketDTO ticketDTO : saleDto.getTicketsDto()) {
             Ticket ticket = new Ticket();
             ticket.setDateTime(ticketDTO.getDateTime());
             ticket.setBuyer(buyerService.getBuyerById(ticketDTO.getBuyerId()));
+            ticket.setGame(gameService.getById(ticketDTO.getGameId()));
             ticket.setSale(sale);
             ticketRepository.save(ticket);
         }
@@ -58,4 +61,12 @@ public class SaleService {
         return saleRepository.findAll();
     }
 
+    public void editDate(LocalDate saleDate, Integer id) throws Exception {
+        Sale sale = saleRepository.findById(id).orElse(null);
+        if (sale == null) {
+            throw new Exception("Sale not found");
+        }
+        sale.setSaleDate(saleDate);
+        saleRepository.save(sale);
+    }
 }

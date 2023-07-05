@@ -12,7 +12,7 @@ public class SaleDTO {
 
     private Integer id;
    
-    private List<TicketsDTO> ticketsDto;
+    private List<TicketDTO> ticketsDto;
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate saleDate;
 

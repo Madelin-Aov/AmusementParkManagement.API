@@ -1,8 +1,10 @@
 package com.apm.API.services;
 
-import com.apm.API.dtos.TicketsDTO;
+import com.apm.API.dtos.TicketDTO;
+import com.apm.API.dtos.TicketOutputDTO;
 import com.apm.API.entities.Ticket;
 import com.apm.API.repositories.TicketRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ public class TicketService {
     @Autowired
     BuyerService buyerService;
 
-    public void createTicket(TicketsDTO ticketsDTO) {
+    public void createTicket(TicketDTO ticketsDTO) {
         Ticket ticket = new Ticket();
         ticket.setBuyer(buyerService.getBuyerById(ticketsDTO.getBuyerId()));
         ticket.setDateTime(ticketsDTO.getDateTime());
@@ -30,9 +32,16 @@ public class TicketService {
         }
         ticketRespository.deleteById(id);
     }
-    
-      public List<Ticket> getTickets() {
-        return ticketRespository.findAll();
+
+    public List<TicketOutputDTO> getTickets() {
+        List<TicketOutputDTO> tickets = new ArrayList();
+        for (Ticket ticket : ticketRespository.findAll()) {
+            TicketOutputDTO ticketOutputDTO = new TicketOutputDTO(
+                    ticket.getId(), ticket.getDateTime(), ticket.getBuyer().getId(),
+                    ticket.getBuyer().getMail(), ticket.getGame().getId(), ticket.getGame().getName());
+            tickets.add(ticketOutputDTO);
+        }
+        return tickets;
     }
-      
+
 }
