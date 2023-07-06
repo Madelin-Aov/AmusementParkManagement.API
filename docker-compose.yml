@@ -4,7 +4,7 @@ services:
     react_app:
         container_name: react_app
         image: im-react-app:1.0.0
-        build: C:/src/AmusementPark/AmusementParkManager.UI/
+        build: ../AmusementParkManager.UI/
         ports:
             - 4200:4200
         depends_on:
