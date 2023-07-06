@@ -7,10 +7,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReportService {
+
     @Autowired
     private SaleRepository saleRepository;
-    
-    public Integer getCountTicketsBySaleDate(Date date){
-        return saleRepository.getCountTicketsBySaleDate();
+
+    public Integer getCountTicketsBySaleDate(String date) {
+        return saleRepository.getCountTicketsBySaleDate(date);
     }
+
+    public Integer getCountTicketsByGameAndSaleDate(String date, Integer gameId) {
+        return saleRepository.getCountTicketsByGameAndSaleDate(date, gameId);
+    }
+
+    public Integer getSaleTotalPriceByDay(Integer day) {
+        return saleRepository.getSaleTotalPriceByDay(day);
+    }
+
 }

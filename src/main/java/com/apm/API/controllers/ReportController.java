@@ -18,7 +18,18 @@ public class ReportController {
     private ReportService reportervice;
 
     @GetMapping("/getCountTicketsBySaleDate")
-    public Integer getCountTicketsBySaleDate(@RequestParam("date") @DateTimeFormat(pattern = "dd-MM-yyyy") Date date) {
+    public Integer getCountTicketsBySaleDate(@RequestParam("date") String date) {
         return reportervice.getCountTicketsBySaleDate(date);
     }
+
+    @GetMapping("/getCountTicketsByGameAndSaleDate")
+    public Integer getCountTicketsByGameAndSaleDate(@RequestParam("date") String date, @RequestParam("gameId") Integer gameId) {
+        return reportervice.getCountTicketsByGameAndSaleDate(date, gameId);
+    }
+
+    @GetMapping("/getSaleTotalPriceByDay")
+    public Integer getSaleTotalPriceByDay(@RequestParam("day") Integer day) {
+        return reportervice.getSaleTotalPriceByDay(day);
+    }
+
 }

@@ -1,6 +1,10 @@
 package com.apm.API.security;
 
+import com.apm.API.entities.Employee;
+import com.apm.API.entities.User;
 import com.apm.API.enums.EmployeeRole;
+import com.apm.API.repositories.EmployeeRepository;
+import com.apm.API.repositories.UserRepository;
 import com.apm.API.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,6 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     UserService userSerivce;
 
     @Autowired
+    EmployeeRepository employeeRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userSerivce).passwordEncoder(NoOpPasswordEncoder.getInstance());
@@ -42,11 +52,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        if (userRepository.findByUserName("admin") == null) {
+            User user = new User("admin", "admin");
+            userRepository.save(user);
+
+            Employee employee = new Employee();
+            employee.setName("ADMIN");
+            employee.setMail("admin@gmail.com");
+            employee.setType(EmployeeRole.ADMIN);
+            employee.setUser(user);
+            employeeRepository.save(employee);
+        }
+        
+        if (userRepository.findByUserName("game") == null) {
+            User user = new User("game", "game");
+            userRepository.save(user);
+
+            Employee employee = new Employee();
+            employee.setName("GAME");
+            employee.setMail("game@gmail.com");
+            employee.setType(EmployeeRole.GAME);
+            employee.setUser(user);
+            employeeRepository.save(employee);
+        }
+
         http.cors().and().authorizeRequests()
-                .antMatchers("/employee/**","/buyer/**","/user/**","/report/**")
-                    .hasRole("ADMIN")
-                .antMatchers("/game/**","/sale/**","/ticket/**","/report/**")
-                    .hasRole("GAME")
+                .antMatchers("/employee/**", "/buyer/create", "/buyer/edit"
+                        , "/buyer/delete", "/user/**")
+                .hasRole("ADMIN")
+                .antMatchers("/game/create","/game/edit","/game/delete",
+                        "/sale/**", "/ticket/**")
+                .hasRole("GAME")
+                .antMatchers("/report/**","/buyer/getAll","/game/getAll")
+                .hasAnyRole("GAME","ADMIN")
                 .antMatchers("/login/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest()
@@ -56,8 +95,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
-    
-     @Bean
+
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("*"); // Permite todas las solicitudes desde cualquier origen

@@ -26,7 +26,7 @@ public class Employee extends Person implements Serializable {
    
     @ManyToOne()
     @JoinColumn(name = "game_id")
-    @JsonBackReference
+    @JsonIgnore()
     private Game game;
     
     @OneToOne()
