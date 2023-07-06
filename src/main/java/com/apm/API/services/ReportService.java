@@ -23,4 +23,8 @@ public class ReportService {
         return saleRepository.getSaleTotalPriceByDay(day);
     }
 
+    public Integer getSaleTotalPriceByMonthAndYear(Integer day, Integer year) {
+        return saleRepository.getSaleTotalPriceByMonthAndYear(day, year);
+    }
+
 }

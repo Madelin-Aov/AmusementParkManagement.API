@@ -31,5 +31,9 @@ public class ReportController {
     public Integer getSaleTotalPriceByDay(@RequestParam("day") Integer day) {
         return reportervice.getSaleTotalPriceByDay(day);
     }
+      @GetMapping("/getSaleTotalPriceByMonthAndYear")
+    public Integer getSaleTotalPriceByMonthAndYear(@RequestParam("month") Integer month,@RequestParam("year") Integer year) {
+        return reportervice.getSaleTotalPriceByMonthAndYear(month, year);
+    }
 
 }

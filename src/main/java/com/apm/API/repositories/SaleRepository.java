@@ -23,4 +23,9 @@ public interface SaleRepository extends JpaRepository<Sale, Integer> {
     @Query(value = "SELECT SUM(s.total_price) FROM sale s WHERE DAYOFWEEK(s.sale_date)= :day ",
              nativeQuery = true)
     public Integer getSaleTotalPriceByDay(@Param("day") Integer day);
+    
+    //Sumatoria total de los montos de ventas en un determinado mes y año
+    @Query(value = "SELECT SUM(s.total_price) FROM sale s WHERE MONTH(s.sale_date)= :month AND YEAR(s.sale_date)= :year  ",
+             nativeQuery = true)
+    public Integer getSaleTotalPriceByMonthAndYear(@Param("month") Integer month,@Param("year") Integer year);
 }
